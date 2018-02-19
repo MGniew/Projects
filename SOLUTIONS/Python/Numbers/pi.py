@@ -1,9 +1,9 @@
-from decimal import *
 '''calculates pi to n didgit'''
+from decimal import Decimal, getcontext
 
 
 def fraction_generator_maclaurin(n):
-    '''calculates fractions for macuarin series'''
+    '''Calculates fractions for macuarin series'''
     x = 1
     y = 1
     for i in range(n):
@@ -11,15 +11,17 @@ def fraction_generator_maclaurin(n):
         x += 2
         y *= -1
 
+
 def calculate_pi_maclaurin():
-    '''calculates pi using Maclaurin series (pi = 4/3 - 4/5 + 4/7...'''
+    '''Calculates pi using Maclaurin series (pi = 4/3 - 4/5 + 4/7...'''
     sum = Decimal(0)
     for i in fraction_generator_maclaurin(50000):
         sum += i
     return sum
 
+
 def calculate_pi_bbp_series(n):
-    '''simple bbp alg. '''
+    '''Simple bbp alg. '''
     k = 0
     for i in range(n):
         a = 120 * k**2 + 151 * k + 47
@@ -27,8 +29,9 @@ def calculate_pi_bbp_series(n):
         yield Decimal(1)/Decimal(16**k) * Decimal(a)/Decimal(b)
         k += 1
 
+
 def bbp_sum(j,n):
-    '''bbp digit-extraction algorithm'''
+    '''Bbp digit-extraction algorithm'''
     
     #left
     sl = 0.0
@@ -48,11 +51,13 @@ def bbp_sum(j,n):
             sr = srn
         k += 1
     return sl + sr
-        
+
+
 def calculate_pi_bbp(n):
     n -= 1
     x = (4*bbp_sum(1, n) - 2*bbp_sum(4, n) - bbp_sum(5, n) - bbp_sum(6, n)) % 1.0
     return "%1x" % int(x * 16)     
+
 
 if __name__ == '__main__':
 
