@@ -24,9 +24,7 @@ def get_next_prime(current):
             current += 2
 
         if is_prime(current):
-            break
-
-    return current
+            return current
 
 def main():
     
